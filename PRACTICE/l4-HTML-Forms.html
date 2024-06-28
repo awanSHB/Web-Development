@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form Validation</title>
+
+    <style>
+
+        h3{
+            text-align: center;
+            color: maroon;
+        }
+
+        ul{
+            width: auto;
+            background-color: black;
+            list-style-type: none;
+            color: aliceblue;
+        }
+
+        li{
+            display: inline-block;
+            padding: 16px 24px;
+        }
+        li:hover{
+            color: blueviolet;
+        }
+        
+
+
+    </style>
+</head>
+<body>
+
+    <!-- 
+    The html form tags:
+    input
+    label 
+    select 
+    textarea 
+    button 
+    fieldset 
+    legend 
+    datalist 
+    output 
+    option 
+    optgroup 
+    -->
+
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>News</li>
+            <li>Contact</li>
+            <li>About</li>
+        </ul>
+    </nav>
+
+    <h2>Text Field </h2>
+
+    <form action="/action_page.php">
+        <label for="fname">First Name</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last Name</label><br>
+        <input type="text" name="lname" id="lname"><br>
+        <label for="pwd">Password:</label><br>
+        <input type="password" name="pwd" id="pwd"><br>
+        
+        <h3>Choose your gender</h3>
+        <input type="radio" name="gender" id="Male">
+        <label for="Male">Male</label><br>
+        <input type="radio" name="gender" id="Female">
+        <label for="Female">Female</label><br>
+        <input type="radio" name="gender" id="Other">
+        <label for="Other">Other</label><br>
+        
+        <h3>Checkbox:</h3>
+        <input type="checkbox" name="v1" id="v1" value="car">
+        <label for="v1">I have a Car</label><br>
+        <input type="checkbox" name="v2" id="v2" value="bike">
+        <label for="v2">I have a Bike</label><br>
+        <input type="checkbox" name="v3" id="v3" value="boat">
+        <label for="v3">I have a boat</label><br>
+        
+        <h3>File Upload:</h3>
+        <label for="myfile">Select a file: </label>
+        <input type="file" name="myfile" id="myfile"><br>
+
+        <h3>Input Button: </h3>
+        <input type="button" onclick="alert('Hello Motu!')" value="Click Me!"><br>
+
+        <h3>The Select Element: </h3>
+        <label for="cars">Choose a car: </label>
+        <select name="cars" id="cars">
+            <option value="bmw">BMW</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="volvo">Volvo</option>
+            <option value="toyota">Toyota</option>
+        </select><br>
+
+        <h3>Text Area: </h3>
+        <textarea name="message" cols="30" rows="10">
+        </textarea><br>
+
+        <h3>Fieldset and Legend: </h3>
+        <fieldset style="width: auto;">
+            <legend>Personal:</legend>
+            <label for="fname">First Name</label><br>
+            <input type="text" id="fname" name="fname"><br>
+            <label for="lname">Last Name</label><br>
+            <input type="text" name="lname" id="lname"><br>
+        </fieldset><br>
+
+        <h3>datalist: </h3>
+        <label for="mobil">Choose your mobile: </label>
+        <input list="mobile" name="mobil" id="mobil">
+        <datalist id="mobile">
+            <option value="Vivo">
+            <option value="Realme">
+            <option value="Oppo">
+            <option value="Smasung">
+            <option value="Xiaomi">
+            <option value="Redmi">
+        </datalist><br>
+
+        <h3>The Optgroup Element: </h3>
+        <label for="cars">Choose You Car: </label>
+        <select name="cars" id="cars">
+            <optgroup label="Swedish Cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+            </optgroup>
+            <optgroup label="British Cars">
+                <option value="Bentley">Bentley</option>
+                <option value="Rolls Royce">Rolls Royce</option>
+            </optgroup>
+            <optgroup label="German Cars">
+                <option value="audi">Audi</option>
+                <option value="porsche">Porsche</option>
+            </optgroup>
+            
+        </select><br>
+
+
+        <br><br>
+        <input type="submit" value="submit">
+        <input type="reset">
+    </form>
+
+
+
+
+
+
+
+        
+
+
+
+</body>
+</html>

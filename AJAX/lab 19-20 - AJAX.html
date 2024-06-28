@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX</title>
+  </head>
+  <body>
+    <main>
+      <h1>Introduction/Demonstration to AJAX</h1>
+      <button type="button" onclick="makeRequest()">Submit AJAX Request</button>
+    </main>
+
+    <!-- Script -->
+    <script type="text/javascript">
+      function makeRequest() {
+        const url = "request-handler-for-lab-task.php";
+        let person = {
+          api_key: "ABC123",
+          name: "Mohsin Ahmed",
+          age: 29,
+          email: "mohsin.ahmed@comsats.edu.pk",
+        };
+        // fetch(path, object)
+        // object => method, data(body)
+
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(person),
+        })
+          .then((response) => response.text())
+          .then((result) => {
+            // check request-response from the server
+            let resp_obj = JSON.parse(result);
+            if (resp_obj.action_status === true) {
+              alert(resp_obj.message.success);
+            } else {
+              alert(resp_obj.message.error);
+            }
+          })
+          .catch();
+      }
+    </script>
+  </body>
+</html>

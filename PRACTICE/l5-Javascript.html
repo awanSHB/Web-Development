@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<body>
+    
+    <script>
+        function varText(){
+            var x=1;
+            {
+                var x=2;
+                document.write(x + "<br>");
+            }
+            document.write(x + "<br>");
+        }
+
+        function letText(){
+            let x = 1;
+            {
+                let x = 2;
+                document.write(x + "<br>");
+            }
+            document.write(x + "<br>");
+        }
+
+        varText();
+        letText();
+
+    </script>
+
+    <p id="demo"></p>
+
+    <script>
+        var person = {
+            firstname : "John",
+            lastname : "Doe",
+            age : 50,
+            eyecolor:"blue",
+
+            fullname : function(){
+                return this.firstname + " " + this.lastname;
+            }
+        };
+
+        // accessing object
+
+        // document.getElementById("demo").innerHTML = person.firstname + " is " +
+        // person.age + " years old.";
+
+        document.getElementById("demo").innerHTML = person.fullname();
+    </script>
+
+
+    <br><br>
+
+    <p id="demo"></p>
+
+    <script>
+        function Person(fn, ln, age, eye){
+            this.firstname = fn;
+            this.lastname = ln;
+            this.age = age;
+            this.eyecolor = eye;
+        }
+
+        var myBrother = new Person("John", "Doe", 30, "blue");
+        var myFried = new Person("Sally", "Rally", 35, "green");
+        document.getElementById("demo").innerHTML = 
+        "My Brother is "+ myBrother.age + " My Friend is " + myFried.age;
+
+
+    </script>
+
+    <br><br>
+
+    <p id="demo"></p>
+    <p id="demo1"></p>
+
+    <script>
+        var fruits = ["Apple", "Banana", "Orange"];
+        document.getElementById("demo").innerHTML = fruits.join(" * ");
+
+        var num1 = [2, 3, 4, 5]
+        var num2 = num1.map(myfunction);
+
+        document.getElementById("demo1").innerHTML = num2;
+        function myfunction(value, index, array){
+            return value * 2;
+        }
+    </script>
+
+
+    <!-- <script>
+        for( var i=0; i<3; i++){
+            alert(i);
+        }
+    </script> -->
+
+    <br><br>
+
+    <p id="demoo"></p>
+
+    <script>
+        class Car{
+            constructor(brand){
+                this.carname = brand;
+            }
+
+            present(){
+                return "I have a " + this.carname;
+            }
+
+        }
+
+        class Model extends Car{
+            constructor(brand, mod){
+                super(brand);
+                this.model = mod;
+            }
+            show(){
+                return this.present() + ', it is a '+this.model;
+            }
+        }
+
+        mycar = new Model("Ford", "Mustang");
+        document.getElementById("demoo").innerHTML = mycar.show();
+    </script>
+
+    <br><br><br>
+
+    <p>Input the number between 5 and 10</p>
+    <input type="text" id="d1">
+    <button type="button" onclick="myFunction()">Test Input</button>
+
+    <p id="p01"></p>
+
+    <script>
+        function myFunction(){
+            var message, x;
+            message = document.getElementById("p01");
+            message.innerHTML = "";
+            x = document.getElementById("d1").value;
+
+            try {
+                if (x== "") throw "is Empty";
+                if (isNaN(x)) throw "is not a number";
+                if (x > 10) throw "is too high";
+                if (x < 5) throw "is too low";
+            }
+
+            catch(err){
+                message.innerHTML = "Input " + err;
+            }
+        }
+    </script>
+
+    <br><br><br>
+
+    <!-- Confirm Box -->
+    <button onclick="myF()">Try confirm</button>
+
+    <script>
+        function myF(){
+            if(confirm("Press a Button")){
+                alert("You Pressed Ok!");
+            }
+            else{
+                alert("You Pressed Cancel!");
+            }
+        }
+    </script>
+
+    <br><br>
+
+    <button onclick="myF()">Try prompt</button>
+
+    <script>
+        function myF(){
+            var person = prompt("Enter Your name: ", "Harry Potter");
+            if (person == null){
+                alert("User cancel the prompt");
+            }
+            else{
+                alert("Hello "+ person + "! How are you tonight?");
+            }
+        }
+    </script>
+
+    <br><br>
+
+    <div id="myDiv1">
+        <h2>Bubbling</h2>
+        <p id="myp1">Click Bubbling</p>
+    </div><br>
+
+    <div id="myDiv2">
+        <h2>Capturing</h2>
+        <p id="myp2">Click Capturing</p>
+    </div>
+
+    <script>
+        document.getElementById("myp1").addEventListener("click", function(){
+            alert("You clicked the p element!");
+        }, false);
+
+        document.getElementById("myDiv1").addEventListener("click", function(){
+            alert("You clicked the div element!");
+        }, false);
+
+        document.getElementById("myp2").addEventListener("click", function(){
+            alert("You clicked the p element!");
+        }, true);
+
+        document.getElementById("myDiv2").addEventListener("click", function(){
+            alert("You clicked the div element!");
+        }, true);
+
+        
+    </script>
+
+
+    
+
+</body>
+</html>

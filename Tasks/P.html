@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      font-size: 24px;
+      border: 2px solid #333;
+      cursor: pointer;
+    }
+
+    .cell-X {
+      background-color: #87CEEB; /* Light Sky Blue for X */
+    }
+
+    .cell-O {
+      background-color: #FFD700; /* Gold for O */
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #markChoice {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Tic-Tac-Toe Game</h1>
+
+    <div id="markChoice">
+      <label for="markSelect">Choose your mark:</label>
+      <select id="markSelect">
+        <option value="X">X</option>
+        <option value="O">O</option>
+      </select>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="result"></div>
+
+    <button onclick="restartGame()">Restart Game</button>
+  </div>
+
+  <script>
+    // Game variables
+    var currentPlayer;
+    var gameBoard;
+    var gameActive;
+
+    // Create the game board
+    function createBoard() {
+      var boardElement = document.getElementById('board');
+      boardElement.innerHTML = '';
+      gameBoard = ['', '', '', '', '', '', '', '', ''];
+      gameActive = true;
+
+      // Set the initial player based on the selected mark
+      var markSelect = document.getElementById('markSelect');
+      currentPlayer = markSelect.value;
+
+      for (var i = 0; i < 9; i++) {
+        var cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.setAttribute('data-index', i);
+        cell.addEventListener('click', handleCellClick);
+        boardElement.appendChild(cell);
+      }
+    }
+
+    // Handle cell click event
+    function handleCellClick(event) {
+      if (!gameActive) return;
+
+      var index = event.target.getAttribute('data-index');
+
+      if (gameBoard[index] === '') {
+        gameBoard[index] = currentPlayer;
+        event.target.textContent = currentPlayer;
+        event.target.classList.add(`cell-${currentPlayer}`);
+
+        if (checkWinner()) {
+          document.getElementById('result').innerHTML = `Player ${currentPlayer} wins!`;
+          gameActive = false;
+        } else if (gameBoard.every(cell => cell !== '')) {
+          document.getElementById('result').innerHTML = "It's a tie!";
+          gameActive = false;
+        } else {
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+      }
+    }
+
+    // Check for a winner
+    function checkWinner() {
+      const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],  // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],  // Columns
+        [0, 4, 8], [2, 4, 6]               // Diagonals
+      ];
+
+      return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+      });
+    }
+
+    // Restart the game
+    function restartGame() {
+      createBoard();
+      document.getElementById('result').innerHTML = '';
+    }
+
+    // Initialize the game
+    createBoard();
+  </script>
+</body>
+</html>

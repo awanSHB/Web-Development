@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+    <title>Word Count</title>
+</head>
+<body>
+    <label for="sentence">Enter a sentence:</label>
+    <textarea id="sentence" rows="4" cols="50" oninput="countWords()"></textarea>
+    
+    <div id="wordCount"></div>
+
+    <script>
+        function countWords() {
+            var sentence = document.getElementById("sentence").value;
+
+            // Use split to count words
+            var words = sentence.split(/\s+/).filter(function(word) {
+                return word.length > 0;
+            });
+
+            document.getElementById("wordCount").innerHTML = "Total words: " + words.length;
+        }
+    </script>
+</body>
+</html>

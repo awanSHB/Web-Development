@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+    <title>Character Count</title>
+</head>
+<body>
+    <!-- Label and textarea for entering a sentence -->
+    <label for="sentence">Enter a sentence:</label>
+    <textarea id="sentence" rows="4" cols="50" oninput="countCharacters()"></textarea>
+    
+    <!-- Display the character count -->
+    <div id="charCount"></div>
+
+    <script>
+        // JavaScript function to count characters excluding spaces
+        function countCharacters() {
+            // Get the value of the textarea (the entered sentence)
+            var sentence = document.getElementById("sentence").value;
+
+            // Use the replace method to remove spaces and then use the length property
+            var charCount = sentence.replace(/\s/g, "").length;
+
+            // Display the character count in the designated div
+            document.getElementById("charCount").innerHTML = "Total : " + charCount;
+        }
+    </script>
+</body>
+</html>

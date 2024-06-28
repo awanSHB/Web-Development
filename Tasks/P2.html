@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word List</title>
+  <style>
+    /* Add some basic styling for better presentation */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Word List</h1>
+
+  <!-- Input field for the user to enter words -->
+  <input type="text" id="wordInput" placeholder="Enter a word">
+  <button onclick="addWord()">Add Word</button>
+
+  <!-- Display the list of entered words -->
+  <h2>Word List:</h2>
+  <ul id="wordList"></ul>
+
+  <!-- Display the whole list at the end -->
+  <div id="wholeList"></div>
+
+  <script>
+    // JavaScript function to add the entered word to the list
+    function addWord() {
+      // Get the input value
+      var word = document.getElementById("wordInput").value;
+
+      // Check if the input is not empty
+      if (word.trim() !== "") {
+        // Create a new list item
+        var listItem = document.createElement("li");
+
+        // Set the text content of the list item to the entered word
+        listItem.textContent = word;
+
+        // Append the list item to the word list
+        document.getElementById("wordList").appendChild(listItem);
+
+        // Clear the input field
+        document.getElementById("wordInput").value = "";
+      }
+
+      // Display the whole list
+    //   displayWholeList();
+    }
+
+    // JavaScript function to display the whole list
+    // function displayWholeList() {
+    //   // Get all list items from the word list
+    //   var listItems = document.getElementById("wordList").getElementsByTagName("li");
+
+    //   // Create an array to hold the words
+    //   var words = [];
+
+    //   // Loop through the list items and add each word to the array
+    //   for (var i = 0; i < listItems.length; i++) {
+    //     words.push(listItems[i].textContent);
+    //   }
+
+    //   // Display the whole list in the designated div
+    //   document.getElementById("wholeList").innerHTML = "Whole List: " + words.join(", ");
+    // }
+  </script>
+</body>
+</html>

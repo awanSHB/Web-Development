@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do App</title>
+    <!-- Add Bootstrap CSS Link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* CSS to set the background color */
+        body {
+            background-color: #6ee2c3; /* Lavender */
+        }
+        /* CSS to center and underline the title */
+        .app-title {
+            text-align: center;
+            text-decoration: underline;
+        }
+        /* CSS for task list items */
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Add margin to create space between task bars */
+        }
+        .btn-group {
+            display: flex;
+            gap: 5px;
+        }
+        .task-name {
+            width: 70%;
+            display: inline-block;
+        }
+        .time {
+            width: 20%;
+            display: inline-block;
+            font-weight: bold;
+            margin-right: 10px; /* Decrease the margin to control the space */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="app-title">My To-Do List</h1>
+        <form id="task-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="task" placeholder="Add a new task" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="time" placeholder="Time to perform the task">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+        <ul id="task-list" class="list-group mt-3"></ul>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to add a new task with an associated time
+        function addTask(taskText, timeText, pinned = false) {
+            const taskList = document.getElementById('task-list');
+
+            // Create a new list item for the task
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.innerHTML = `
+                <span class="task-name">${taskText}</span>
+                <span class="time">${timeText}</span>
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm edit">Edit</button>
+                    ${pinned ? '<button class="btn btn-warning btn-sm pin">Unpin</button>' : '<button class="btn btn-success btn-sm pin">Pin</button>'}
+                    <button class="btn btn-danger btn-sm delete">Delete</button>
+                </div>
+            `;
+            if (pinned) {
+                taskList.insertBefore(li, taskList.firstChild);
+            } else {
+                taskList.appendChild(li);
+            }
+        }
+
+        // Event listener for submitting the form
+        document.getElementById('task-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const taskInput = document.getElementById('task');
+            const timeInput = document.getElementById('time');
+            if (taskInput.value !== '') {
+                addTask(taskInput.value, timeInput.value);
+                taskInput.value = '';
+                timeInput.value = '';
+            }
+        });
+
+        // Event listener for deleting and editing tasks
+        document.getElementById('task-list').addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete')) {
+                e.target.parentElement.parentElement.remove();
+            }
+            if (e.target.classList.contains('edit')) {
+                const newText = prompt('Edit the task:', e.target.parentElement.parentElement.querySelector('.task-name').textContent);
+                if (newText !== null) {
+                    e.target.parentElement.parentElement.querySelector('.task-name').textContent = newText;
+                }
+            }
+            if (e.target.classList.contains('pin')) {
+                const li = e.target.parentElement.parentElement;
+                const isPinned = li.querySelector('.pin').textContent === 'Unpin';
+                if (isPinned) {
+                    li.querySelector('.pin').textContent = 'Pin';
+                    document.getElementById('task-list').appendChild(li);
+                } else {
+                    li.querySelector('.pin').textContent = 'Unpin';
+                    document.getElementById('task-list').insertBefore(li, document.getElementById('task-list').firstChild);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
